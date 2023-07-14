@@ -7,13 +7,12 @@ from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import UnstructuredPDFLoader
 import os
 
-# os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-4")
 
 # Chat UI title
-st.title("ChatGPT with Langchain")
+st.title("ChatGPT with your data")
 
 # File uploader
 uploaded_files = st.file_uploader("Choose PDF files", accept_multiple_files=True, type="pdf")
