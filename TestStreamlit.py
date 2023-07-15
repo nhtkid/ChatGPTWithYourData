@@ -12,7 +12,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo")
 
 # Chat UI title
-st.title("ChatGPT with your data")
+st.title("ChatGPT with your data using Langchain")
 
 # File uploader in the sidebar on the left
 with st.sidebar:
