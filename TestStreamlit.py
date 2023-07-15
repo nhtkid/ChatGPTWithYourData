@@ -14,8 +14,9 @@ llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo")
 # Chat UI title
 st.title("ChatGPT with your data")
 
-# File uploader
-uploaded_files = st.file_uploader("Choose PDF files", accept_multiple_files=True, type="pdf")
+# File uploader in the sidebar on the left
+with st.sidebar:
+    uploaded_files = st.file_uploader("Choose PDF files", accept_multiple_files=True, type="pdf")
 
 # Check if files are uploaded
 if uploaded_files:
