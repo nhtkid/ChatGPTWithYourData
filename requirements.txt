@@ -1,7 +1,7 @@
 langchain
 streamlit
 openai
-chromadb
+chromadb ==0.3.29
 tiktoken
 pypdf
 unstructured[local-inference]
