@@ -4,5 +4,5 @@ openai <= 0.27.8
 chromadb <= 0.3.29
 tiktoken <= 0.4.0
 pypdf <= 3.14.0
-unstructured[local-inference] <= 0.9.0
+unstructured[all-docs]
 poppler-utils
