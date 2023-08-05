@@ -1,7 +1,7 @@
-langchain
-streamlit
-openai
+langchain <= 0.0.252
+streamlit <= 1.25.0
+openai <= 0.27.8
 chromadb <= 0.3.29
-tiktoken
-pypdf
-unstructured[local-inference]
+tiktoken <= 0.4.0
+pypdf <= 3.14.0
+unstructured[local-inference] <= 0.9.0
