@@ -4,7 +4,7 @@ from langchain.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
-from langchain.document_loaders import UnstructuredPDFLoader
+from langchain.document_loaders import UnstructuredFileLoader
 import os
 
 # Chat UI title
@@ -42,8 +42,8 @@ if uploaded_files:
             with open(file_path, "wb") as f:
                 f.write(uploaded_file.getvalue())
 
-            # Use UnstructuredPDFLoader to load the PDF file
-            loader = UnstructuredPDFLoader(file_path)
+            # Use UnstructuredFileLoader to load the PDF file
+            loader = UnstructuredFileLoader(file_path)
             loaded_documents = loader.load()
             print(f"Number of files loaded: {len(loaded_documents)}")
 
