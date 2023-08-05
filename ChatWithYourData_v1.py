@@ -5,6 +5,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import UnstructuredPDFLoader
+import os
 
 # Chat UI title
 st.title("ChatGPT with your data using Langchain")
