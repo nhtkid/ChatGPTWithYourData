@@ -21,7 +21,7 @@ if not openai_api_key:
 # Set OPENAI_API_KEY as an environment variable
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
-llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo")
+llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo",streaming=True)
 
 with st.sidebar:
     uploaded_files = st.file_uploader("Please upload your files", accept_multiple_files=True, type=None)
