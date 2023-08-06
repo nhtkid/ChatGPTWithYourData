@@ -8,7 +8,7 @@ from langchain.document_loaders import UnstructuredFileLoader
 import os
 
 # Chat UI title
-st.title("Upload your own files and ask questions like ChatGPT")
+st.header("Upload your own files and ask questions like ChatGPT")
 st.subheader('File type supported: PDF/DOCX/TXT :city_sunrise:')
 
 # File uploader in the sidebar on the left
@@ -26,16 +26,16 @@ llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo")
 with st.sidebar:
     uploaded_files = st.file_uploader("Please upload your files", accept_multiple_files=True, type=None)
     version_history = """
-    Version 0.0.1 (2023-08-01):
+    Version 0.1.0 (2023-08-01):
     - Initial release.
     - Support PDF files only.
     
-    Version 0.0.2 (2023-08-06):
+    Version 0.1.1 (2023-08-06):
     - Support multiple file formats.
     - User to provide OpenAI API key.
     - Added version history display.
     """
-    st.info(version_history, icon="ℹ️")
+    st.info(version_history, icon="🤖")
 
 # Check if files are uploaded
 if uploaded_files:
