@@ -36,7 +36,7 @@ with st.sidebar:
     - Added version history display.
     """
     st.info(version_history, icon="🤖")
-    st.info("Please refresh the browser if you decided to upload more files to reset the session", icon=None)
+    st.info("Please refresh the browser if you decided to upload more files to reset the session", icon="🚨")
 # Check if files are uploaded
 if uploaded_files:
     # Print the number of files to console
