@@ -12,6 +12,7 @@ st.title("ChatGPT with your data using Langchain")
 
 # File uploader in the sidebar on the left
 with st.sidebar:
+    st.info('This is a purely informational message', icon="ℹ️")
     openai_api_key = st.text_input("OpenAI API Key", type="password")
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.")
