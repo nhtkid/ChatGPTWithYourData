@@ -9,7 +9,7 @@ import os
 
 # Chat UI title
 st.title("Upload your own files and ask questions like ChatGPT")
-    st.header('File type supported: PDF/DOCX/TXT :city_sunrise:')
+st.header('File type supported: PDF/DOCX/TXT :city_sunrise:')
 
 # File uploader in the sidebar on the left
 with st.sidebar:
