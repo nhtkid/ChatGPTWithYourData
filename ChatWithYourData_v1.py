@@ -23,19 +23,14 @@ os.environ["OPENAI_API_KEY"] = openai_api_key
 
 llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo",streaming=True)
 
+# Load version history from the text file
+def load_version_history():
+    with open("version_history.txt", "r") as file:
+        return file.read()
+        
 with st.sidebar:
     uploaded_files = st.file_uploader("Please upload your files", accept_multiple_files=True, type=None)
-    version_history = """
-    Version 0.1.0 (2023-08-01):
-    - Initial release.
-    - Support PDF files only.
-    
-    Version 0.1.1 (2023-08-06):
-    - Support multiple file formats.
-    - User to provide OpenAI API key.
-    - Added version history display.
-    """
-    st.info(version_history, icon="🤖")
+    st.info(load_version_history(), icon="🤖")
     st.info("Please refresh the browser if you decided to upload more files to reset the session", icon="🚨")
 # Check if files are uploaded
 if uploaded_files:
