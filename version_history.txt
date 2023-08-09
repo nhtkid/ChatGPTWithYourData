@@ -1,0 +1,11 @@
+# Version History
+## Version 0.1.1 (2023-Aug-06)
+- **New Features:**
+  - Support PFD/DOCX/TXT.
+  - User provide OpenAI API Key.
+  - Updated Layout
+
+## Version 0.1.0 (2023-Aug-01)
+- **Launch Release**
+  - Built-in OpenAI API Key.
+  - PDF Only.
