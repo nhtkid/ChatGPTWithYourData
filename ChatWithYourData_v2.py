@@ -4,44 +4,77 @@ from langchain.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
-from langchain.document_loaders import UnstructuredPDFLoader
+from langchain.document_loaders import UnstructuredFileLoader
 import os
-
-os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
-
-llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo")
+import pytube  # Import pytube library for YouTube video download
+import whisper  # Import Whisper library for Whisper transcription
 
 # Chat UI title
-st.title("ChatGPT with your data using Langchain")
+st.header("Upload your own files and ask questions like ChatGPT")
+st.subheader('File type supported: PDF/DOCX/TXT :city_sunrise:')
 
 # File uploader in the sidebar on the left
 with st.sidebar:
-    uploaded_files = st.file_uploader("Choose PDF files", accept_multiple_files=True, type="pdf")
+    openai_api_key = st.text_input("OpenAI API Key", type="password")
+if not openai_api_key:
+    st.info("Please add your OpenAI API key to continue.")
+    st.stop()
 
-# Check if files are uploaded
-if uploaded_files:
-    # Print the number of files to console
+# Set OPENAI_API_KEY as an environment variable
+os.environ["OPENAI_API_KEY"] = openai_api_key
+
+llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo",streaming=True)
+
+# Load version history from the text file
+def load_version_history():
+    with open("version_history.txt", "r") as file:
+        return file.read()
+        
+with st.sidebar:
+    uploaded_files = st.file_uploader("Please upload your files", accept_multiple_files=True, type=None)
+    youtube_url = st.sidebar.text_input("YouTube URL")
+    st.info(load_version_history(), icon="🤖")
+    st.info("Please refresh the browser if you decided to upload more files to reset the session", icon="🚨")
+
+# Check if files are uploaded or YT URL is provided
+if uploaded_files or youtube_url:
+    # Print the number of files uploaded or YouTube URL provided to console
     print(f"Number of files uploaded: {len(uploaded_files)}")
 
     # Load the data and perform preprocessing only if it hasn't been loaded before
     if "processed_data" not in st.session_state:
         # Load the data from uploaded PDF files
         documents = []
-        for uploaded_file in uploaded_files:
-            # Get the full file path of the uploaded file
-            file_path = os.path.join(os.getcwd(), uploaded_file.name)
+        if uploaded_files:
+            for uploaded_file in uploaded_files:
+                # Get the full file path of the uploaded file
+                file_path = os.path.join(os.getcwd(), uploaded_file.name)
 
-            # Save the uploaded file to disk
-            with open(file_path, "wb") as f:
-                f.write(uploaded_file.getvalue())
+                # Save the uploaded file to disk
+                with open(file_path, "wb") as f:
+                    f.write(uploaded_file.getvalue())
 
-            # Use UnstructuredPDFLoader to load the PDF file
-            loader = UnstructuredPDFLoader(file_path)
-            loaded_documents = loader.load()
-            print(f"Number of files loaded: {len(loaded_documents)}")
+                # Use UnstructuredFileLoader to load the PDF file
+                loader = UnstructuredFileLoader(file_path)
+                loaded_documents = loader.load()
+                print(f"Number of files loaded: {len(loaded_documents)}")
 
-            # Extend the main documents list with the loaded documents
-            documents.extend(loaded_documents)
+                # Extend the main documents list with the loaded documents
+                documents.extend(loaded_documents)
+
+        # Load the YouTube audio stream if URL is provided
+        if youtube_url:
+            # Load the Whisper model
+            model = whisper.load_model('base')
+            # Download the audio stream
+            youtube_video = pytube.YouTube(youtube_url)
+            streams = youtube_video.streams.filter(only_audio=True)
+            stream = streams.first()
+            stream.download(filename="youtube_audio.mp4")
+            # Transcribe the audio using OpenAI Whisper API
+            output = model.transcribe("youtube_audio.mp4")
+            youtube_text = output['text']
+            documents.append(youtube_text)  # Add the transcribed text to the documents list
 
         # Chunk the data, create embeddings, and save in vectorstore
         text_splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
@@ -66,7 +99,6 @@ if uploaded_files:
 
     # Initialize Langchain's QA Chain with the vectorstore
     qa = ConversationalRetrievalChain.from_llm(llm,vectorstore.as_retriever())
-
 
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -97,4 +129,4 @@ if uploaded_files:
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 else:
-    st.write("Please upload PDF files.")
+    st.write("Please upload your files and provide a YouTube URL for transcription.")
