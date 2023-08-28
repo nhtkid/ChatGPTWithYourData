@@ -7,7 +7,8 @@ from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import UnstructuredFileLoader
 import os
 import pytube  # Import pytube library for YouTube video download
-import whisper  # Import Whisper library for Whisper transcription
+# import whisper  # Import Whisper library for Whisper transcription
+import openai
 
 # Chat UI title
 st.header("Upload your own files and ask questions like ChatGPT")
@@ -65,15 +66,18 @@ if uploaded_files or youtube_url:
         # Load the YouTube audio stream if URL is provided
         if youtube_url:
             # Load the Whisper model
-            model = whisper.load_model('base')
+            # model = whisper.load_model('base')
             # Download the audio stream
             youtube_video = pytube.YouTube(youtube_url)
             streams = youtube_video.streams.filter(only_audio=True)
             stream = streams.first()
             stream.download(filename="youtube_audio.mp4")
             # Transcribe the audio using OpenAI Whisper API
-            output = model.transcribe("youtube_audio.mp4")
-            youtube_text = output['text']
+            # output = model.transcribe("youtube_audio.mp4")
+            # Transcribe the audio using OpenAI Whisper API
+            with open("youtube_audio.mp4", "rb") as audio_file:
+                transcript = openai.Audio.transcribe("whisper-1", audio_file)
+            youtube_text = transcript['text']
             documents.append(youtube_text)  # Add the transcribed text to the documents list
 
         # Chunk the data, create embeddings, and save in vectorstore
