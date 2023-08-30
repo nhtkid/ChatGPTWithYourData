@@ -78,7 +78,10 @@ if uploaded_files or youtube_url:
             with open("youtube_audio.mp4", "rb") as audio_file:
                 transcript = openai.Audio.transcribe("whisper-1", audio_file)
             youtube_text = transcript['text']
-            documents.append(youtube_text)  # Add the transcribed text to the documents list
+            # Create a Langchain document instance for the transcribed text
+            from langchain.documents import Document
+            youtube_document = Document(page_content=youtube_text, metadata={})
+            documents.append(youtube_document)
 
         # Chunk the data, create embeddings, and save in vectorstore
         text_splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
