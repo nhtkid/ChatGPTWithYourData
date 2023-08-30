@@ -7,4 +7,4 @@ pypdf <= 3.14.0
 unstructured[all-docs]
 poppler-utils
 pytube <= 15.0.0
-git+https://github.com/openai/whisper.git
+ffmpeg-python <= 0.2.0
