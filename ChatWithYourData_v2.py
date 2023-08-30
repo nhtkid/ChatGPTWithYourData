@@ -5,6 +5,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import UnstructuredFileLoader
+from langchain.documents import Document
 import os
 import pytube
 import openai
@@ -72,7 +73,6 @@ if uploaded_files or youtube_url:
                 transcript = openai.Audio.transcribe("whisper-1", audio_file)
             youtube_text = transcript['text']
             # Create a Langchain document instance for the transcribed text
-            from langchain.documents import Document
             youtube_document = Document(page_content=youtube_text, metadata={})
             documents.append(youtube_document)
 
