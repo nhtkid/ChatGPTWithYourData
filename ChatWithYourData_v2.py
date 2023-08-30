@@ -88,10 +88,10 @@ if uploaded_files or youtube_url:
                 combined_docs = [doc.page_content for doc in docs]
                 text = " ".join(combined_docs)
             
-            # Create a Langchain document instance for the transcribed text
+        # Create a Langchain document instance for the transcribed text
         from langchain.documents import Document
-            youtube_document = Document(page_content=youtube_text, metadata={})
-            documents.append(youtube_document)
+        youtube_document = Document(page_content=youtube_text, metadata={})
+        documents.append(youtube_document)
 
         # Chunk the data, create embeddings, and save in vectorstore
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
