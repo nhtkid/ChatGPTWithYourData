@@ -1,6 +1,7 @@
 import streamlit as st
 from langchain.document_loaders.generic import GenericLoader
-from langchain.document_loaders.parsers import OpenAIWhisperParser, OpenAIWhisperParserLocal
+from langchain.document_loaders.parsers import OpenAIWhisperParser
+from langchain.document_loaders.parsers import OpenAIWhisperParserLocal
 from langchain.document_loaders.blob_loaders.youtube_audio import YoutubeAudioLoader
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
