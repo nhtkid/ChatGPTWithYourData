@@ -89,7 +89,7 @@ if uploaded_files or youtube_url:
                 text = " ".join(combined_docs)
             
             # Create a Langchain document instance for the transcribed text
-            from langchain.documents import Document
+        from langchain.documents import Document
             youtube_document = Document(page_content=youtube_text, metadata={})
             documents.append(youtube_document)
 
