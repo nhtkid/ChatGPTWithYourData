@@ -8,3 +8,6 @@ unstructured[all-docs]
 poppler-utils
 pytube <= 15.0.0
 ffmpeg-python <= 0.2.0
+yt_dlp
+pydub
+librosa
