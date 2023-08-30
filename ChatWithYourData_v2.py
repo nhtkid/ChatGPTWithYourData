@@ -10,8 +10,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import UnstructuredFileLoader
 import os
-import pytube  # Import pytube library for YouTube video download
-# import whisper  # Import Whisper library for Whisper transcription
+import pytube
 import openai
 
 # Chat UI title
@@ -69,26 +68,17 @@ if uploaded_files or youtube_url:
 
         # Load the YouTube audio stream if URL is provided
         if youtube_url:
-                # Transcribe YouTube audio to text
-                local = False  # Set this to True for local parsing
-
-                # Create a list with the provided YouTube URL
-                urls = [youtube_url]
-            
-                # Directory to save audio files
-                save_dir = "~/Downloads/YouTube"
-            
-                # Transcribe the videos to text
-                if local:
-                    loader = GenericLoader(YoutubeAudioLoader(urls, save_dir), OpenAIWhisperParserLocal())
-                else:
-                    loader = GenericLoader(YoutubeAudioLoader(urls, save_dir), OpenAIWhisperParser())
-                docs = loader.load()
-            
-                # Combine doc content
-                combined_docs = [doc.page_content for doc in docs]
-                text = " ".join(combined_docs)
-                documents.append(text)
+            youtube_video = pytube.YouTube(youtube_url)
+            streams = youtube_video.streams.filter(only_audio=True)
+            stream = streams.first()
+            stream.download(filename="youtube_audio.mp4")
+            with open("youtube_audio.mp4", "rb") as audio_file:
+                transcript = openai.Audio.transcribe("whisper-1", audio_file)
+            youtube_text = transcript['text']
+            # Create a Langchain document instance for the transcribed text
+            from langchain.documents import Document
+            youtube_document = Document(page_content=youtube_text, metadata={})
+            documents.append(youtube_document)
 
         # Chunk the data, create embeddings, and save in vectorstore
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
