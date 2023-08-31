@@ -1,4 +1,4 @@
-langchain -U
+langchain
 streamlit
 openai
 chromadb <= 0.3.29
