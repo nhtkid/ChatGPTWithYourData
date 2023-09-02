@@ -41,6 +41,8 @@ with st.sidebar:
 if uploaded_files or youtube_url:
     # Print the number of files uploaded or YouTube URL provided to console
     print(f"Number of files uploaded: {len(uploaded_files)}")
+    # Create a progress bar to display file upload progress
+    progress_bar = st.progress(0)
 
     # Load the data and perform preprocessing only if it hasn't been loaded before
     if "processed_data" not in st.session_state:
@@ -91,6 +93,9 @@ if uploaded_files or youtube_url:
 
         # Print the number of total chunks to console
         print(f"Number of total chunks: {len(document_chunks)}")
+
+        # Clear the progress bar when processing is complete
+        progress_bar.empty()
 
     else:
         # If the processed data is already available, retrieve it from session state
