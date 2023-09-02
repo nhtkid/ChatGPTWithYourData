@@ -42,24 +42,7 @@ with st.sidebar:
 if uploaded_files or youtube_url:
     # Print the number of files uploaded or YouTube URL provided to console
     print(f"Number of files uploaded: {len(uploaded_files)}")
-
-        # Create a progress bar with an initial value of 0
-    progress_bar = st.progress(0)
-
-    # Define a text message to display above the progress bar
-    progress_text = "Uploading in progress. Please wait."
-
-    # Iterate through the range (0 to 100, for example) to simulate progress
-    for percent_complete in range(101):
-    # Update the progress bar's value and text message
-        progress_bar.progress(percent_complete, text=progress_text)
-
-        # Sleep to simulate some processing time
-        time.sleep(0.1)
-
-    # Clear the progress bar when processing is complete
-    progress_bar.empty()
-        
+      
     # Load the data and perform preprocessing only if it hasn't been loaded before
     if "processed_data" not in st.session_state:
         # Load the data from uploaded PDF files
