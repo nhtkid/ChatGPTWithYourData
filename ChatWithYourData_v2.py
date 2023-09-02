@@ -30,11 +30,20 @@ llm = ChatOpenAI(temperature=0,max_tokens=1000, model_name="gpt-3.5-turbo",strea
 def load_version_history():
     with open("version_history.txt", "r") as file:
         return file.read()
+
+# Determine the maximum height for the st.info component before it becomes scrollable
+max_info_height = 200  # Adjust this value as needed
         
 with st.sidebar:
     uploaded_files = st.file_uploader("Please upload your files", accept_multiple_files=True, type=None)
     youtube_url = st.sidebar.text_input("YouTube URL")
-    st.info(load_version_history(), icon="🤖")
+    # st.info(load_version_history(), icon="🤖")
+    
+    # Create a container with a fixed height for the version history
+    version_history_container = st.container()
+    version_history_container.header("Version History")
+    version_history_container.info(load_version_history(), icon="🤖", max_height=max_info_height, key="version_history")
+
     st.info("Please refresh the browser if you decided to upload more files to reset the session", icon="🚨")
 
 # Check if files are uploaded or YT URL is provided
