@@ -56,6 +56,9 @@ if uploaded_files or youtube_url:
 
         # Sleep to simulate some processing time
         time.sleep(0.1)
+
+    # Clear the progress bar when processing is complete
+    progress_bar.empty()
         
     # Load the data and perform preprocessing only if it hasn't been loaded before
     if "processed_data" not in st.session_state:
@@ -107,8 +110,6 @@ if uploaded_files or youtube_url:
         # Print the number of total chunks to console
         print(f"Number of total chunks: {len(document_chunks)}")
 
-        # Clear the progress bar when processing is complete
-        progress_bar.empty()
 
     else:
         # If the processed data is already available, retrieve it from session state
