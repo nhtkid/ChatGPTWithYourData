@@ -42,7 +42,7 @@ with st.sidebar:
     # Create a container with a fixed height for the version history
     version_history_container = st.container()
     version_history_container.header("Version History")
-    version_history_container.info(load_version_history(), icon="🤖", max_height=max_info_height, key="version_history")
+    version_history_container.write(load_version_history(), icon="🤖", max_height=max_info_height, key="version_history")
 
     st.info("Please refresh the browser if you decided to upload more files to reset the session", icon="🚨")
 
