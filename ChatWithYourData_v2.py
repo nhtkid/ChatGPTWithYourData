@@ -43,7 +43,7 @@ if uploaded_files or youtube_url:
     # Print the number of files uploaded or YouTube URL provided to console
     print(f"Number of files uploaded: {len(uploaded_files)}")
 
-    # Create a progress bar with an initial value of 0
+        # Create a progress bar with an initial value of 0
     progress_bar = st.progress(0)
 
     # Define a text message to display above the progress bar
@@ -56,7 +56,7 @@ if uploaded_files or youtube_url:
 
         # Sleep to simulate some processing time
         time.sleep(0.1)
-
+        
     # Load the data and perform preprocessing only if it hasn't been loaded before
     if "processed_data" not in st.session_state:
         # Load the data from uploaded PDF files
