@@ -69,7 +69,11 @@ if uploaded_files or youtube_url:
                 if file_path.endswith((".png", ".jpg")):
                     # Use UnstructuredImageLoader to load the image file
                     image_loader = UnstructuredImageLoader(file_path)
-                    image_data = image_loader.load()
+                    image_binary_data = image_loader.load()
+                
+                    # Convert the image binary data to a base64-encoded string
+                    image_data = base64.b64encode(image_binary_data).decode("utf-8")
+                
                     # Create a Langchain document instance for the image data
                     image_document = Document(page_content=image_data, metadata={})
                     documents.append(image_document)
