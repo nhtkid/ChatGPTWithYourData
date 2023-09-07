@@ -2,9 +2,10 @@ langchain
 streamlit
 openai
 chromadb <= 0.3.29
-tiktoken <= 0.4.0
-pypdf <= 3.14.0
+tiktoken
+pypdf
 unstructured[all-docs]
+pdfminer
 poppler-utils
-pytube <= 15.0.0
-ffmpeg-python <= 0.2.0
+pytube
+ffmpeg-python
