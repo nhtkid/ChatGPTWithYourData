@@ -33,7 +33,7 @@ def load_version_history():
         return file.read()
 
 # Determine the maximum height for the st.info component before it becomes scrollable
-max_info_height = 100  # Adjust this value as needed
+max_info_height = 10  # Adjust this value as needed
         
 with st.sidebar:
     uploaded_files = st.file_uploader("Please upload your files", accept_multiple_files=True, type=None)
