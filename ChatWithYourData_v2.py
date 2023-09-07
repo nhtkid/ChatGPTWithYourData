@@ -65,26 +65,21 @@ if uploaded_files or youtube_url:
                 with open(file_path, "wb") as f:
                     f.write(uploaded_file.getvalue())
 
-                # Determine the file type based on its extension
-                file_extension = os.path.splitext(uploaded_file.name)[1].lower()
-        
-                if file_extension in {'.pdf', '.docx', '.txt'}:
-                    # Use UnstructuredFileLoader to load PDF/DOCX/TXT file
+                 # Check if the file is an image (you can adjust this condition as needed)
+                if file_path.endswith((".png", ".jpg")):
+                    # Use UnstructuredImageLoader to load the image file
+                    image_loader = UnstructuredImageLoader(file_path)
+                    image_data = image_loader.load()
+                    # Create a Langchain document instance for the image data
+                    image_document = Document(page_content=image_data, metadata={})
+                    documents.append(image_document)
+                elif file_path.endswith((".pdf", ".docx", ".txt")):
+                    # Use UnstructuredFileLoader to load the PDF/DOCX/TXT file
                     loader = UnstructuredFileLoader(file_path)
-                elif file_extension in {'.jpg', '.png'}:
-                    # Use UnstructuredImageLoader to load image file
-                    loader = UnstructuredImageLoader(file_path)
-                else:
-                    # Handle unsupported file types here if needed
-                    st.warning(f"Unsupported file type: {file_extension}")
-                    continue
-                
-                # Load the document using the appropriate loader
-                loaded_documents = loader.load()
-                print(f"Number of files loaded: {len(loaded_documents)}")
-
-                # Extend the main documents list with the loaded documents
-                documents.extend(loaded_documents)
+                    loaded_documents = loader.load()
+                    print(f"Number of files loaded: {len(loaded_documents)}")
+                    # Extend the main documents list with the loaded documents
+                    documents.extend(loaded_documents)
 
         # Load the YouTube audio stream if URL is provided
         if youtube_url:
