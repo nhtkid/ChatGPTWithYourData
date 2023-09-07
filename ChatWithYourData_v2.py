@@ -5,6 +5,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import UnstructuredFileLoader
+from langchain.document_loaders.image import UnstructuredImageLoader
 from langchain.docstore.document import Document
 import os
 import pytube
@@ -64,8 +65,21 @@ if uploaded_files or youtube_url:
                 with open(file_path, "wb") as f:
                     f.write(uploaded_file.getvalue())
 
-                # Use UnstructuredFileLoader to load the PDF file
-                loader = UnstructuredFileLoader(file_path)
+                # Determine the file type based on its extension
+                file_extension = os.path.splitext(uploaded_file.name)[1].lower()
+        
+                if file_extension in {'.pdf', '.docx', '.txt'}:
+                    # Use UnstructuredFileLoader to load PDF/DOCX/TXT file
+                    loader = UnstructuredFileLoader(file_path)
+                elif file_extension in {'.jpg', '.png'}:
+                    # Use UnstructuredImageLoader to load image file
+                    loader = UnstructuredImageLoader(file_path)
+                else:
+                    # Handle unsupported file types here if needed
+                    st.warning(f"Unsupported file type: {file_extension}")
+                    continue
+                
+                # Load the document using the appropriate loader
                 loaded_documents = loader.load()
                 print(f"Number of files loaded: {len(loaded_documents)}")
 
