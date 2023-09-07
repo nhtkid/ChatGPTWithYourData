@@ -70,7 +70,7 @@ if uploaded_files or youtube_url:
                 if file_path.endswith((".png", ".jpg")):
                     # Use UnstructuredImageLoader to load the image file
                     image_loader = UnstructuredImageLoader(file_path)
-                    image_binary_data = image_loader.load()
+                    image_binary_data = image_loader.load()[0].page_content
                 
                     # Convert the image binary data to a base64-encoded string
                     image_data = base64.b64encode(image_binary_data).decode("utf-8")
