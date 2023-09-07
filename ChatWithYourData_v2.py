@@ -10,6 +10,7 @@ from langchain.docstore.document import Document
 import os
 import pytube
 import openai
+import base64
 
 # Chat UI title
 st.header("Upload your own files and ask questions like ChatGPT")
