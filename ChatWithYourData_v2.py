@@ -76,7 +76,6 @@ if uploaded_files or youtube_url:
                     # Use UnstructuredFileLoader to load the PDF/DOCX/TXT file
                     loader = UnstructuredFileLoader(file_path)
                     loaded_documents = loader.load()
-                    print(f"Number of files loaded: {len(loaded_documents)}")
                     # Extend the main documents list with the loaded documents
                     documents.extend(loaded_documents)
 
@@ -97,8 +96,8 @@ if uploaded_files or youtube_url:
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
         document_chunks = text_splitter.split_documents(documents)
         # Print the number of total chunks to console
-        print(f"Number of total chunks: {len(document_chunks)}")
-        print (document_chunks)
+        #print(f"Number of total chunks: {len(document_chunks)}")
+        #print (document_chunks)
 
         embeddings = OpenAIEmbeddings()
         vectorstore = Chroma.from_documents(document_chunks, embeddings)
