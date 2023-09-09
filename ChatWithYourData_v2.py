@@ -47,7 +47,7 @@ with st.sidebar:
 # Check if files are uploaded or YT URL is provided
 if uploaded_files or youtube_url:
     # Print the number of files uploaded or YouTube URL provided to console
-    print(f"Number of files uploaded: {len(uploaded_files)}")
+    st.write(f"Number of files uploaded: {len(uploaded_files)}")
       
     # Load the data and perform preprocessing only if it hasn't been loaded before
     if "processed_data" not in st.session_state:
