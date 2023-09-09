@@ -96,7 +96,7 @@ if uploaded_files or youtube_url:
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
         document_chunks = text_splitter.split_documents(documents)
         # Print the number of total chunks to console
-        #print(f"Number of total chunks: {len(document_chunks)}")
+        print(f"Number of total chunks: {len(document_chunks)}")
         #print (document_chunks)
 
         embeddings = OpenAIEmbeddings()
