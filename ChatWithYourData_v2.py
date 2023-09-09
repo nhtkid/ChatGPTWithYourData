@@ -10,7 +10,6 @@ from langchain.docstore.document import Document
 import os
 import pytube
 import openai
-import base64
 
 # Chat UI title
 st.header("Upload your own files and ask questions like ChatGPT")
@@ -69,15 +68,13 @@ if uploaded_files or youtube_url:
                  # Check if the file is an image (you can adjust this condition as needed)
                 if file_path.endswith((".png", ".jpg")):
                     # Use UnstructuredImageLoader to load the image file
-                    image_loader = UnstructuredImageLoader(file_path)
-                    image_binary_data = image_loader.load()[0].page_content
-                
-                    # Convert the image binary data to a base64-encoded string
-                    image_data = base64.b64encode(image_binary_data).decode("utf-8")
-                
-                    # Create a Langchain document instance for the image data
-                    image_document = Document(page_content=image_data, metadata={})
-                    documents.append(image_document)
+                    image_loader = UnstructuredImageLoader(file_path, mode="single")
+                    # Use [0] to get the single Langchain document
+                    image_data = image_loader.load()[0]
+                    print(image_data)
+                    # Append the Langchain document to the documents list
+                    documents.append(image_data)
+                    
                 elif file_path.endswith((".pdf", ".docx", ".txt")):
                     # Use UnstructuredFileLoader to load the PDF/DOCX/TXT file
                     loader = UnstructuredFileLoader(file_path)
