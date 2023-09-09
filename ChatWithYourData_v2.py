@@ -99,6 +99,9 @@ if uploaded_files or youtube_url:
         # Chunk the data, create embeddings, and save in vectorstore
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
         document_chunks = text_splitter.split_documents(documents)
+        # Print the number of total chunks to console
+        print(f"Number of total chunks: {len(document_chunks)}")
+        print (document_chunks)
 
         embeddings = OpenAIEmbeddings()
         vectorstore = Chroma.from_documents(document_chunks, embeddings)
@@ -108,10 +111,6 @@ if uploaded_files or youtube_url:
             "document_chunks": document_chunks,
             "vectorstore": vectorstore,
         }
-
-        # Print the number of total chunks to console
-        print(f"Number of total chunks: {len(document_chunks)}")
-
 
     else:
         # If the processed data is already available, retrieve it from session state
