@@ -38,10 +38,9 @@ with st.sidebar:
     youtube_url = st.sidebar.text_input("YouTube URL")
     # st.info(load_version_history(), icon="🤖")
     
-    # Create a container with a fixed height for the version history
-    version_history_container = st.container()
-    version_history_container.header("Version History")
-    version_history_container.write(load_version_history(), max_height=100, key="version_history")
+    # Create an expander for the version history in the sidebar
+    with st.sidebar.expander("Version History"):
+        st.write(load_version_history())
 
     st.info("Please refresh the browser if you decided to upload more files to reset the session", icon="🚨")
 
