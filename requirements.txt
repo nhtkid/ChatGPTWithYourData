@@ -10,3 +10,5 @@ poppler-utils
 pytube
 ffmpeg-python
 transformers
+pandas
+pyarrow
