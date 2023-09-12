@@ -63,22 +63,22 @@ if uploaded_files or youtube_url:
                     f.write(uploaded_file.getvalue())
 
                  # Check if the file is an image (you can adjust this condition as needed)
-                #if file_path.endswith((".png", ".jpg")):
+                if file_path.endswith((".png", ".jpg")):
                     # Use UnstructuredImageLoader to load the image file
-                #    image_loader = UnstructuredImageLoader(file_path, mode="single")
+                    image_loader = UnstructuredImageLoader(file_path, mode="single")
                     # Use [0] to get the single Langchain document
-                #    image_data = image_loader.load()[0]
+                    image_data = image_loader.load()[0]
                 #    print(image_data)
                     # Append the Langchain document to the documents list
-                #    documents.append(image_data)
+                    documents.extend(image_data)
 
-                if file_path.endswith((".png", ".jpg")):
-                    # Use ImageCaptionLoader to load the image file
-                    image_loader = ImageCaptionLoader(path_images=[file_path])
+#                if file_path.endswith((".png", ".jpg")):
+ #                   # Use ImageCaptionLoader to load the image file
+  #                  image_loader = ImageCaptionLoader(path_images=[file_path])
                     # Load image captions
-                    image_documents = image_loader.load()
+   #                 image_documents = image_loader.load()
                     # Append the Langchain documents to the documents list
-                    documents.extend(image_documents)
+    #                documents.extend(image_documents)
                     
                 elif file_path.endswith((".pdf", ".docx", ".txt")):
                     # Use UnstructuredFileLoader to load the PDF/DOCX/TXT file
