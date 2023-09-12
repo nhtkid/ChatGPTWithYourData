@@ -39,7 +39,7 @@ with st.sidebar:
     # st.info(load_version_history(), icon="🤖")
     
     # Create an expander for the version history in the sidebar
-    with st.sidebar.expander("# Version History", expanded=False):
+    with st.sidebar.expander("**Version History**", expanded=False):
         st.write(load_version_history())
 
     st.info("Please refresh the browser if you decided to upload more files to reset the session", icon="🚨")
