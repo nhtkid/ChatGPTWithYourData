@@ -9,3 +9,4 @@ pdfminer
 poppler-utils
 pytube
 ffmpeg-python
+transformers
