@@ -6,7 +6,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.document_loaders.image import UnstructuredImageLoader
-# from langchain.document_loaders import ImageCaptionLoader
+from langchain.document_loaders import ImageCaptionLoader
 from langchain.docstore.document import Document
 import os
 import pytube
