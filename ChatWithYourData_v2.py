@@ -153,5 +153,5 @@ if uploaded_files or youtube_url:
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 else:
-    st.session_state.processed_data = None
+    # st.session_state.processed_data = None
     st.write("Please upload your files and provide a YouTube URL for transcription.")
