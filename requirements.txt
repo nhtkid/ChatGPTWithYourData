@@ -12,4 +12,5 @@ ffmpeg-python
 transformers
 pandas
 pyarrow
-arrow-cpp-python
+# arrow-cpp-python
+pip -U
