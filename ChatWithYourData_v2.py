@@ -14,7 +14,7 @@ import openai
 
 # Chat UI title
 st.header("Upload your own files and ask questions like ChatGPT")
-st.subheader('File type supported: PDF/DOCX/TXT :city_sunrise:')
+st.subheader('File type supported: PDF/DOCX/TXT/JPG/PNG/YouTube :city_sunrise:')
 
 # File uploader in the sidebar on the left
 with st.sidebar:
