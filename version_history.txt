@@ -1,5 +1,7 @@
 *Version 0.1.3 (2023-Sep-16)*
-- Support Image Caption with Salesforce model.
+- Support Image Caption with Salesforce Model.
+- Multiple Files Support.
+- Updated Version History as an Expander.
 
 *Version 0.1.2 (2023-Sep-01)*
 - Support Youtube URL.
@@ -8,9 +10,9 @@
 *Version 0.1.1 (2023-Aug-06)*
 - Support PFD/DOCX/TXT.
 - User provide OpenAI API Key.
-- Updated Layout
+- Updated Layout.
 
 *Version 0.1.0 (2023-Aug-01)*
-- Launch Release
+- Launch Release.
 - Built-in OpenAI API Key.
 - PDF Only.
