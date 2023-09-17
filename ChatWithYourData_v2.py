@@ -92,6 +92,8 @@ if uploaded_files or youtube_url:
             streams = youtube_video.streams.filter(only_audio=True)
             stream = streams.first()
             stream.download(filename="youtube_audio.mp4")
+            # Set the API key for Whisper
+            openai.api_key = openai_api_key
             with open("youtube_audio.mp4", "rb") as audio_file:
                 transcript = openai.Audio.transcribe("whisper-1", audio_file)
             youtube_text = transcript['text']
