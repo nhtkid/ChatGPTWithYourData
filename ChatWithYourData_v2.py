@@ -30,7 +30,7 @@ with st.sidebar:
     os.environ["OPENAI_API_KEY"] = openai_api_key
 
 # Initialize ChatOpenAI model
-llm = ChatOpenAI(temperature=0, max_tokens=1000, model_name="gpt-3.5-turbo", streaming=True)
+llm = ChatOpenAI(temperature=0, max_tokens=16000, model_name="gpt-3.5-turbo-16k", streaming=True)
 
 # Load version history from the text file
 def load_version_history():
