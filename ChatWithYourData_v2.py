@@ -139,8 +139,15 @@ if uploaded_files or youtube_url:
             st.markdown(prompt)
     
         # Query the assistant using the latest chat history
-        history = [{"role": message["role"], "content": message["content"]} for message in st.session_state.messages]
-        result = qa({"question": prompt, "chat_history": history})
+        history = [
+            f"{message['role']}: {message['content']}" 
+            for message in st.session_state.messages
+        ]
+    
+        result = qa({
+            "question": prompt, 
+            "chat_history": history
+        })
     
         # Display assistant response in chat message container
         with st.chat_message("assistant"):
