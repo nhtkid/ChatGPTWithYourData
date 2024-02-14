@@ -134,22 +134,22 @@ if uploaded_files or youtube_url:
 
     # Accept user input
     if prompt := st.chat_input("Ask your questions?"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    # Query the assistant using the latest chat history
-    history = [{"role": message["role"], "content": message["content"]} for message in st.session_state.messages]
-    result = qa({"question": prompt, "chat_history": history})
-
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = result["answer"]
-        message_placeholder.markdown(full_response + "|")
-    message_placeholder.markdown(full_response)    
-    print(full_response)
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+    
+        # Query the assistant using the latest chat history
+        history = [{"role": message["role"], "content": message["content"]} for message in st.session_state.messages]
+        result = qa({"question": prompt, "chat_history": history})
+    
+        # Display assistant response in chat message container
+        with st.chat_message("assistant"):
+            message_placeholder = st.empty()
+            full_response = result["answer"]
+            message_placeholder.markdown(full_response + "|")
+        message_placeholder.markdown(full_response)    
+        print(full_response)
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 else:
     st.write("Please upload your files and provide a YouTube URL for transcription.")
