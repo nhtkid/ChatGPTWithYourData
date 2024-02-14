@@ -13,7 +13,7 @@ import pytube
 import openai
 
 # Chat UI title
-st.header("Upload your own files and ask questions like ChatGPT")
+st.header("Upload your own file and ask questions like ChatGPT")
 st.subheader('File types supported: PDF/DOCX/TXT/JPG/PNG/YouTube :city_sunrise:')
 
 # File uploader in the sidebar on the left
